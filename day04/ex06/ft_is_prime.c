@@ -5,17 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/25 23:15:42 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/25 23:15:45 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/25 23:44:33 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/08/25 23:44:36 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_is_prime(int nb)
 {
-	if (nb <= 1)
+	int i;
+
+	if ((nb < 2 || nb % 2 == 0) && nb != 2)
+	{
 		return (0);
-	else if (nb / 1 == nb && nb / nb == 1)
-		return (1);
-	else
-		return (0);
+	}
+	i = 1;
+	while (i * i <= nb && i * i > 0)
+	{
+		if (nb % (i * 2 + 1) == 0)
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
