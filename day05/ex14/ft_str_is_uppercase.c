@@ -6,11 +6,11 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 07:19:01 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/28 08:00:17 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/08/28 19:49:30 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_str_is_uppercase(char *str)
+int	ft_str_is_uppercase(char *str)
 {
 	while (*str != '\0')
 	{
