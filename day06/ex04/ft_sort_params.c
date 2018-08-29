@@ -6,63 +6,56 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 17:35:48 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/29 18:58:30 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/08/29 23:09:43 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+void	ft_putchar(char c);
 
-void	ft_putstr(char *str)
-{
-	while (*str != '\0')
-		ft_putchar(*str++);
-}
-
-void	ft_swap(char *a, char *b)
-{
-	int temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-int		s_bubblesort(int argc, char **argv)
+int		ft_strcmp(char *s1, char *s2)
 {
 	int i;
-	int j;
 
 	i = 0;
-	j = 0;
-
-	while (i < argc - 1)
-	{
-		while (j < argc - i - 1)
-		{
-			if(argv[i] > argv[j + 1])
-				ft_swap(&argv[j], &argv[j+1]);
-			j++;
-		}
+	while ((s1[i] == s2[i]) && (s1[i] != '\0' && s2[i] != '\0'))
 		i++;
+	return (s1[i] - s2[i]);
+}
+
+void	ft_sort_params(char *c)
+{
+	while (*c)
+	{
+		ft_putchar(*c);
+		c++;
 	}
 }
 
-int		main(int argc, char **argv)
+int		main(int argc, char *argv[])
 {
-	int i;
+	int		i;
+	char	*c;
 
-	i = 1;
-	while (i < argc)
+	i = 2;
+	argc = 1;
+	while (argv[argc])
 	{
-		s_bubblesort(i, argv[i]);
-		ft_putstr(argv[i]);
+		while (argv[i])
+		{
+			if (ft_strcmp(argv[argc], argv[i]) > 0)
+			{
+				c = argv[argc];
+				argv[argc] = argv[i];
+				argv[i] = c;
+			}
+			i++;
+		}
+		ft_sort_params(argv[argc]);
 		ft_putchar('\n');
-		i++;
+		argc++;
+		i = argc + 1;
 	}
 	return (0);
 }
