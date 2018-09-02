@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   match.c                                            :+:      :+:    :+:   */
+/*   nmatch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 23:13:22 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/02 20:16:50 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/09/02 19:49:14 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/09/02 20:16:51 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	match(char *s1, char *s2)
+int	nmatch(char *s1, char *s2)
 {
 	if (*s1 == '\0' && *s2 == '\0')
 		return (1);
 	if (*s1 == '\0')
 	{
 		if (*s2 == '*')
-			return (match(s1, ++s2));
+			return (nmatch(s1, s2 + 1));
 		else
 			return (0);
 	}
 	if (*s2 == '*')
-		return (match(++s1, s2) || match(s1, ++s2));
+		return (nmatch(s1 + 1, s2) + nmatch(s1, s2 + 1));
 	if (*s1 == *s2)
-		return (match(++s1, ++s2));
+		return (nmatch(s1 + 1, s2 + 1));
 	if (*s1 != *s2)
 		return (0);
 	return (0);
