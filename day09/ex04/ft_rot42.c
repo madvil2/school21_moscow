@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   ft_rot42.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/30 21:52:58 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/08/30 22:17:32 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	ft_ultimate_range(int **range, int min, int max)
+char	*ft_rot42(char *str)
 {
-	int *arr;
-	int i;
-	int count;
+	char	*param;
+	int		i;
 
-	count = max - min;
 	i = 0;
-	if(count <= 0)
+	while (*str != '\0')
 	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
-		i++;
-		min++;
+		if (str[i] >= 97 && str[i] <= 122)
+		{
+			param[i] = ((str[i] - 97) + 16) % 26 + 97;
+			i++;
+		}
+		else if (str[i] >= 65 && str[i] <= 90)
+		{
+			param[i] = ((str[i] - 65) + 16) % 26 + 65;
+			i++;
+		}
 	}
-	*range = arr;
-	return (sizeof(range));
 }

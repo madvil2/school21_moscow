@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   ft_boolean.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/30 08:43:23 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/09/01 21:00:34 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef FT_BOOLEAN_H
+# define FT_BOOLEAN_H
 
-int	ft_ultimate_range(int **range, int min, int max)
-{
-	int *arr;
-	int i;
-	int count;
+# include <unistd.h>
+# define TRUE 1
+# define FALSE 0
+# define EVEN(x) (x % 2) == 0
+# define EVEN_MSG "I have an even number of arguments.\n"
+# define ODD_MSG "I have an odd number of arguments.\n"
+# define SUCCESS 1
 
-	count = max - min;
-	i = 0;
-	if(count <= 0)
-	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
-		i++;
-		min++;
-	}
-	*range = arr;
-	return (sizeof(range));
-}
+typedef int	t_bool;
+
+#endif

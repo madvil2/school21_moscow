@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   match.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/09/01 23:13:22 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/09/02 16:59:19 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	ft_ultimate_range(int **range, int min, int max)
+int	match(char *s1, char *s2)
 {
-	int *arr;
-	int i;
-	int count;
-
-	count = max - min;
-	i = 0;
-	if(count <= 0)
+	if (*s1 == '\0' && *s2 == '\0')
+		return (1);
+	if (*s1 == '\0')
 	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
-		i++;
-		min++;
+		if (*s2 == '*')
+			return (match(s1, ++s2));
+		else
+			return (0);
 	}
-	*range = arr;
-	return (sizeof(range));
+	if (*s2 == '*')
+		return (match(++s1, s2) || match(s1, ++s2));
+	if (*s1 == *s2)
+		return (match(++s1, ++s2));
+	if (*s1 != *s2)
+		return (0);
+	return (0);
 }

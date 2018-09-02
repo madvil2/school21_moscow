@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   ft_takes_place.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/30 09:42:40 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/08/30 21:46:07 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 
-int	ft_ultimate_range(int **range, int min, int max)
+char	*ft_xm(int hour)
 {
-	int *arr;
-	int i;
-	int count;
+	return ((hour >= 12 && hour <= 23) ? "P.M." : "A.M.");
+}
 
-	count = max - min;
-	i = 0;
-	if(count <= 0)
-	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
-		i++;
-		min++;
-	}
-	*range = arr;
-	return (sizeof(range));
+void	ft_takes_place(int hour)
+{
+	if (hour < 0 || hour > 23)
+		return ;
+	printf("THE FOLLOWING TAKES PLACE BETWEEN ");
+	printf("%d", (hour % 12 == 0) ? 12 : (hour % 12));
+	printf(".00 %s", ft_xm(hour));
+	hour++;
+	printf(" AND %d", (hour % 12 == 0) ? 12 : (hour % 12));
+	printf(".00 %s\n", ft_xm(hour));
 }

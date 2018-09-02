@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   ft_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/30 23:46:07 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/08/31 00:06:51 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <ft_ultimator.h>
 
-int	ft_ultimate_range(int **range, int min, int max)
+void	ft_destroy(char ***factory)
 {
-	int *arr;
 	int i;
-	int count;
+	int j;
 
-	count = max - min;
+	j = 0;
 	i = 0;
-	if(count <= 0)
+	while (factory[i])
 	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
+		while (factory[i][j])
+		{
+			free(factory[i][j]);
+			j++;
+		}
+		free(factory[i]);
+		j = 0;
 		i++;
-		min++;
 	}
-	*range = arr;
-	return (sizeof(range));
+	free(factory);
 }

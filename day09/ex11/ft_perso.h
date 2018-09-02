@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
+/*   ft_perso.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 01:41:18 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/08/31 23:10:31 by pcollio-         ###   ########.fr       */
+/*   Created: 2018/08/31 05:12:28 by pcollio-          #+#    #+#             */
+/*   Updated: 2018/08/31 05:24:05 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef FT_PERSO_H
+# define FT_PERSO_H
+#define SAVE_THE_WORLD "Savetheworld"
 
-int	ft_ultimate_range(int **range, int min, int max)
+typedef struct s_perso	t_perso;
+
+struct	s_perso
 {
-	int *arr;
-	int i;
-	int count;
+	char	*name;
+	double	life;
+	int		age;
+	char	profession;
+};
 
-	count = max - min;
-	i = 0;
-	if(count <= 0)
-	{
-		count = 0;
-		return (0);
-	}	
-	arr = (int *)malloc((count) * sizeof(int));
-	while (i < count)
-	{
-		arr[i] = min;
-		i++;
-		min++;
-	}
-	*range = arr;
-	return (sizeof(range));
-}
+#endif
