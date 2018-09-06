@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 20:47:38 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 21:25:12 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 21:46:04 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <errno.h>
+#define BUFF_SIZE 4096
 
 int		ft_putstr(char const *s)
 {
@@ -60,28 +61,19 @@ int		main(int argc, char **argv)
 	int		file;
 	int		i;
 	int		rd;
-	char	buf[2];
+	char	buf[BUFF_SIZE + 1];
 
 	if (ft_error(argc))
 		return (0);
-	i = 1;
-	rd = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
-		file = open(argv[i], O_RDONLY);
-		if (file < 0)
+		if ((file = open(argv[i], O_RDONLY)) < 0)
 			ft_bad_name(argv[i]);
-		else if (read(file, 0, 0) < 0)
-			ft_folder_name(argv[i]);
-		else
-			while (rd)
-			{
-				rd = read(file, buf, 1);
-				buf[rd] = '\0';
-				ft_putstr(buf);
-			}
+		while ((rd = read(file, buf, BUFF_SIZE)) > 0)
+			!(buf[rd] = '\0') && ft_putstr(buf);
+		(rd < 0) ? ft_folder_name(argv[i]) : 0;
 		close(file);
-		i++;
 	}
-	return (errno);
+	return (0);
 }

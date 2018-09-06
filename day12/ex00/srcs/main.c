@@ -6,13 +6,14 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 01:11:29 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 21:18:09 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 21:38:48 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#define BUFF_SIZE 4096
 
 int		ft_strlen(const char *s)
 {
@@ -36,7 +37,7 @@ int		main(int ac, char **av)
 {
 	int		file;
 	int		rd;
-	char	buf[2];
+	char	buf[BUFF_SIZE + 1];
 
 	rd = 1;
 	if (ac == 1)
@@ -50,7 +51,7 @@ int		main(int ac, char **av)
 		{
 			while (rd)
 			{
-				rd = read(file, buf, 1);
+				rd = read(file, buf, BUFF_SIZE);
 				buf[rd] = '\0';
 				ft_putstr(buf);
 			}
