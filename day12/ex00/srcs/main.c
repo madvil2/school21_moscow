@@ -6,20 +6,20 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 01:11:29 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 20:51:26 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 21:18:09 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 int		ft_strlen(const char *s)
 {
 	int i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }

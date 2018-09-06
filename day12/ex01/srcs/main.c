@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 20:47:38 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 21:09:46 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 21:25:12 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 #include <fcntl.h>
 #include <errno.h>
 
-int		ft_strlen(const char *s)
+int		ft_putstr(char const *s)
 {
 	int i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
-	return (i);
-}
-
-int		ft_putstr(char const *s)
-{
 	if (s)
-		return (write(1, s, ft_strlen(s)));
+		return (write(1, s, i));
 	else
 		return (0);
 }
