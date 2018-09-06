@@ -6,12 +6,13 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 01:11:29 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 05:05:43 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 20:51:26 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers.h"
-#include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <fcntl.h>
 
 int		ft_strlen(const char *s)
 {

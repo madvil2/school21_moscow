@@ -6,11 +6,11 @@
 #    By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/06 01:34:28 by pcollio-          #+#    #+#              #
-#    Updated: 2018/09/06 21:11:06 by pcollio-         ###   ########.fr        #
+#    Updated: 2018/09/06 21:12:11 by pcollio-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_display_file
+NAME = ft_cat
 
 SRCS = srcs/main.c
 INCL = includes/
