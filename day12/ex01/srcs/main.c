@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 20:47:38 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/06 21:46:04 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/06 23:34:09 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int		main(int argc, char **argv)
 	{
 		if ((file = open(argv[i], O_RDONLY)) < 0)
 			ft_bad_name(argv[i]);
+		else if (read(file, 0, 0) < 0)
+			ft_folder_name(argv[i]);
 		while ((rd = read(file, buf, BUFF_SIZE)) > 0)
 			!(buf[rd] = '\0') && ft_putstr(buf);
-		(rd < 0) ? ft_folder_name(argv[i]) : 0;
 		close(file);
 	}
 	return (0);
