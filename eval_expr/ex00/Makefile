@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/09/08 09:19:59 by pcollio-          #+#    #+#              #
-#    Updated: 2018/09/09 18:36:38 by pcollio-         ###   ########.fr        #
+#    Created: 2018/09/09 18:43:08 by pcollio-          #+#    #+#              #
+#    Updated: 2018/09/09 18:43:09 by pcollio-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(OBJ_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 fclean:	clean
 	rm -f $(NAME)
 re: fclean all
