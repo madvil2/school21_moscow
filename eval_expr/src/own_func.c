@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 11:04:31 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/08 19:40:53 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 11:41:41 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,131 +14,138 @@
 
 int		count_digits(char *str)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(*str)
+	while (*str)
 	{
-		if(*str >= '0' && *str <= '9')
+		if (*str >= '0' && *str <= '9')
 			count++;
 		str++;
 	}
 	return (count);
 }
 
-char	*ft_split_spaces(char *str)
+char	*delete_tabs(char *str)
 {
-	int j;
-	char *s1;
+	char *a;
+	int n;
+	int i;
 
-	j = 0;
-	s1 = malloc(sizeof(char) * ft_strlen(str) + 1);
-	while(*str != '\0')
+	n = 0;
+	i = 0;
+	while (str[i])
 	{
-		if(*str != ' ')
-			s1[j++] = *str;
+		if (str[i] != ' ' && str[i] != '\t')
+			n++;
+		i++;
+	}
+	a = malloc(sizeof(char) * n + 1);
+	i = 0;
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t')
+			a[i++] = *str;
 		str++;
 	}
-	s1[j] = '\0';
-	return (s1);
+	a[i] = '\0';
+	return (a);
 }
 
 int		count_chars(char *str)
 {
 	int count;
-
+	
 	count = 0;
-	while(*str)
+	while (*str)
 	{
-		if((*str >= '0' && *str <= '9') || *str == ' ')
-			str++;
-		else
-		{
+		if (!(*str >= '0' && *str <= '9') && (*str != ' '))
 			count++;
-			str++;
-		}
+		str++;
 	}
 	return (count);
 }
 
-int		ft_atoi(char *str, int index)
+int		ft_atoi(char *str, int i)
 {
 	int des;
-	int num;
+	int n;
 
 	des = 1;
-	num = 0;
-	while(str[index - 1] >= '0' && str[index - 1] <= '9')
+	n = 0;
+
+	while (str[i-1] >= '0' && str[i-1] <= '9')
 	{
-		num = (str[index--] - '0') * des + num;
+		n = (str[i] - '0') * des + n;
+		i--;
 		des = des * 10;
 	}
-	if(str[index] >= '0' && str[index] <= '9')
-		num = (str[index--] - '0') * des + num;
-	return (num);
+	if (str[i] >= '0' && str[i] <= '9')
+		n = (str[i] - '0') * des + n;
+	return (n);
 }
 
-void	calc(struct stack_int *stk_int, struct stack_char *stk_char)
+void	calc(struct stack_int *stk_i, struct stack_char *stk_c)
 {
 	int a;
 	int b;
 	char op;
 
-	a = stkTop_int(stk_int);
-	pop_int(stk_int);
-	b = stkTop_int(stk_int);
-	pop_int(stk_int);
-	op = stkTop_char(stk_char);
-	pop_char(stk_char);
+	a = stktop(stk_i);
+	pop(stk_i);
+	b = stktop(stk_i);
+	pop(stk_i);
+	op = stktop_c(stk_c);
+	pop_c(stk_c);
 
-	if(op == '+')
-		push_int(stk_int, a + b);
-	else if(op == '-')
-		push_int(stk_int, a - b);
-	else if(op == '/')
-		push_int(stk_int, a / b);
-	else if(op == '*')
-		push_int(stk_int, a * b);
-	else if(op == '%')
-		push_int(stk_int, a % b);
+	if (op == '/')
+		push(stk_i, (b / a));
+	else if (op == '*')
+		push(stk_i, (b * a));
+	else if (op == '+')
+		push(stk_i, (b + a));
+	else if (op == '-')
+		push(stk_i, (b - a));
+	else if (op == '%')
+		push(stk_i, (b % a));
 }
 
-void	first_prior(struct stack_char *stk_char, struct stack_int *stk_int, char op)
+void	f_prioritet(struct stack_int *stk_i, struct stack_char *stk_c, char op)
 {
-	char sop; /* char in stack */
-	
-	sop = stkTop_char(stk_char);
-	if (sop == '(')
-		push_char(stk_char, op);
-	else
+	char sop;
+
+	sop = stktop_c(stk_c);
+	if (sop == '(' || isempty_c(stk_c) == 1)
+		push_c(stk_c, op);
+	else 
 	{
-		calc(stk_int, stk_char);
-		push_char(stk_char,op);
+		calc(stk_i, stk_c);
+		push_c(stk_c, op);
 	}
 }
 
-void	second_prior(struct stack_char *stk_char, struct stack_int *stk_int, char op)
+void	s_prioritet(struct stack_int *stk_i, struct stack_char *stk_c, char op)
 {
-	char sop; /* char in stack */
-	
-	sop = stkTop_char(stk_char);
-	if (sop == '+' || sop == '-' || sop == '(')
-		push_char(stk_char, op);
+	char sop;
+
+	sop = stktop_c(stk_c);
+	if (sop == '+' || sop == '-' || sop == '(' || isempty_c(stk_c) == 1)
+		push_c(stk_c, op);
 	else
 	{
-		calc(stk_int, stk_char);
-		push_char(stk_char,op);
+		calc(stk_i, stk_c);
+		push_c(stk_c, op);
 	}
 }
 
-void	brackets(struct stack_char *stk_char, struct stack_int *stk_int, char op)
+void	brackets(struct stack_int *stk_i, struct stack_char *stk_c, char op)
 {
-	if(op == '(')
-		push_char(stk_char, op);
+	if (op == '(')
+		push_c(stk_c, op);
 	else
 	{
-		while (stkTop_char(stk_char) != '(')
-			calc(stk_int, stk_char);
-		pop_char(stk_char);
+		while (stktop_c(stk_c) != '(')
+			calc(stk_i, stk_c);
+		pop_c(stk_c);
 	}
 }

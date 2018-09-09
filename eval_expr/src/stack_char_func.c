@@ -6,31 +6,27 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 13:43:44 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/08 19:16:24 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 10:15:47 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	init_char(struct stack_char *stk)
+void	init_c(struct stack_char *stk)
 {
 	stk->top = 0;
 }
 
-void	push_char(struct stack_char *stk, int f)
+void	push_c(struct stack_char *stk, char f)
 {
-	if (stk->top)
-	{
-		stk->elem[stk->top] = f;
-		stk->top++;
-	}
+	stk->elem[stk->top] = f;
+	stk->top++;
 }
 
-char	pop_char(struct stack_char *stk)
+char		pop_c(struct stack_char *stk)
 {
-	char elem;
-	if ((stk->top) > 0)
-	{
+	char	elem;
+	if ((stk->top) >= 0) {
 		stk->top--;
 		elem = stk->elem[stk->top];
 		return (elem);
@@ -39,17 +35,17 @@ char	pop_char(struct stack_char *stk)
 		return (0);
 }
 
-char	stkTop_char(struct stack_char *stk)
+char		stktop_c(struct stack_char *stk)
 {
-	if ((stk->top) > 0)
+	if ((stk->top) >= 0)
 		return (stk->elem[stk->top-1]);
 	else
 		return (0);
 }
 
-char	isempty_char(struct stack_char *stk)
+char		isempty_c(struct stack_char *stk)
 {
-	if ((stk->top) == 0)
+	if((stk->top) == 0)
 		return (1);
 	else
 		return (0);
