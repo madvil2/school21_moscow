@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 09:48:46 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/08 20:01:40 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 13:14:15 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,43 @@ void	ft_putstr(char *str)
 		ft_putchar(str[i++]);
 }
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int nb)
 {
-	if (n == -2147483648)
-		ft_putstr("-2147483648");
-	else
+	if (nb < 0)
+		nb = -nb;
+	if (nb >= 10)
 	{
-		if (n < 0)
-		{
-			ft_putchar('-');
-			n *= -1;
-		}
-		if (n >= 10)
-			ft_putnbr(n / 10);
-		ft_putchar((n % 10) + '0');
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
 	}
+	else
+		ft_putchar(nb + '0');
 }
 
-int		ft_strlen(char *str)
+int		count_digits(char *str)
 {
-	int len;
+	int	count;
 
-	len = 0;
-	while(*str)
+	count = 0;
+	while (*str)
 	{
-		if (*str != ' ')
-			len++;
+		if (*str >= '0' && *str <= '9')
+			count++;
 		str++;
 	}
-	return (len);
+	return (count);
+}
+
+int		count_chars(char *str)
+{
+	int count;
+
+	count = 0;
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9') && (*str != ' '))
+			count++;
+		str++;
+	}
+	return (count);
 }

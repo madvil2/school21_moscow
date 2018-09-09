@@ -6,53 +6,48 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 09:19:57 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/09 10:31:56 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 13:51:34 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADERS_H
-
 # define HEADERS_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#define NMAX 50
+# include <stdlib.h>
+# include <unistd.h>
 
-struct		stack_int {
-	int		elem[NMAX];
-	int		top;
-};
+# define NMAX 50
 
-struct		stack_char {
-	char	elem[NMAX];
-    int		top;
-};
+typedef struct	s_int {
+	int			elem[NMAX];
+	int			top;
+}				t_int;
 
-void    ft_putchar(char c);
-void    ft_putnbr(int n);
-void    ft_putstr(char *str);
-char    *delete_tabs(char *str);
-int     count_digits(char *str);
-int     count_chars(char *c);
+typedef struct	s_char {
+	char		elem[NMAX];
+	int			top;
+}				t_char;
 
-void    init(struct stack_int *stk);
-void    push(struct stack_int *stk, int f);
-int     pop(struct stack_int *stk);
-int     stktop(struct stack_int *stk);
-int     isempty(struct stack_int *stk);
-
-void    init_c(struct stack_char *stk);
-void    push_c(struct stack_char *stk, char f);
-char    pop_c(struct stack_char *stk);
-char    stktop_c(struct stack_char *stk);
-char    isempty_c(struct stack_char *stk);
-
-int     ft_atoi(char *str, int i);
-int     eval_expr(char *str);
-void    calc(struct stack_int *stk_i, struct stack_char *stk_c);
-void    f_prioritet(struct stack_int *stk_i, struct stack_char *stk_c, char op);
-void    s_prioritet(struct stack_int *stk_i, struct stack_char *stk_c, char op);
-void    brackets(struct stack_int *stk_i, struct stack_char *stk_c, char op);
-int     solve(char *str, struct stack_int *stk_i, struct stack_char *stk_c);
+void			ft_putchar(char c);
+void			ft_putstr(char *str);
+void			ft_putnbr(int nb);
+int				count_digits(char *str);
+int				count_chars(char *str);
+int				ft_atoi(char *str, int i);
+void			calc(t_int *stk_i, t_char *stk_c);
+void			first_prior(t_int *stk_i, t_char *stk_c, char op);
+void			second_prior(t_int *stk_i, t_char *stk_c, char op);
+void			brackets(t_int *stk_i, t_char *stk_c, char op);
+void			init_char(t_char *stk);
+void			push_char(t_char *stk, char f);
+char			pop_char(t_char *stk);
+char			stktop_char(t_char *stk);
+char			isempty_char(t_char *stk);
+void			init_int(t_int *stk);
+void			push_int(t_int *stk, int f);
+int				pop_int(t_int *stk);
+int				stktop_int(t_int *stk);
+int				isempty_int(t_int *stk);
+int				solve(char *str, t_int *stk_i, t_char *stk_c);
 
 #endif
