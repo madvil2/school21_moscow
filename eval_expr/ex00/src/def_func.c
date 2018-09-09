@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 09:48:46 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/09 13:14:15 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 18:14:31 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@ void	ft_putstr(char *str)
 
 void	ft_putnbr(int nb)
 {
-	if (nb < 0)
-		nb = -nb;
-	if (nb >= 10)
+	int num;
+
+	num = nb;
+	if (num < 0)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putchar('-');
+		num *= -1;
 	}
-	else
-		ft_putchar(nb + '0');
+	if (num > 9)
+		ft_putnbr(num / 10);
+	ft_putchar(num % 10 + 48);
 }
 
 int		count_digits(char *str)

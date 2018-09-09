@@ -6,7 +6,7 @@
 /*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 11:04:31 by pcollio-          #+#    #+#             */
-/*   Updated: 2018/09/09 13:41:29 by pcollio-         ###   ########.fr       */
+/*   Updated: 2018/09/09 18:01:58 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 int		ft_atoi(char *str, int i)
 {
 	int des;
-	int num;
+	int n;
 
 	des = 1;
-	num = 0;
+	n = 0;
 	while (str[i - 1] >= '0' && str[i - 1] <= '9')
 	{
-		num = (str[i--] - '0') * des + num;
+		n = (str[i] - '0') * des + n;
+		i--;
 		des = des * 10;
 	}
 	if (str[i] >= '0' && str[i] <= '9')
-		num = (str[i] - '0') * des + num;
-	return (num);
+		n = (str[i] - '0') * des + n;
+	return (n);
 }
 
 void	calc(t_int *stk_i, t_char *stk_c)
@@ -55,18 +56,18 @@ void	calc(t_int *stk_i, t_char *stk_c)
 
 void	first_prior(t_int *stk_i, t_char *stk_c, char op)
 {
-	char sop;
+	char s_op;
 
-	sop = stktop_char(stk_c);
-	if (sop == '(' || isempty_char(stk_c) == 1)
+	s_op = stktop_char(stk_c);
+	if (s_op == '(' || isempty_char(stk_c) == 1)
 		push_char(stk_c, op);
 	else
 	{
-		while (sop == '*' || sop == '/' || sop == '+'
-		|| sop == '-' || sop == '%')
+		while (s_op == '+' || s_op == '-' || s_op == '*' || s_op == '/'
+				|| s_op == '%')
 		{
 			calc(stk_i, stk_c);
-			sop = stktop_char(stk_c);
+			s_op = stktop_char(stk_c);
 		}
 		push_char(stk_c, op);
 	}
@@ -74,17 +75,17 @@ void	first_prior(t_int *stk_i, t_char *stk_c, char op)
 
 void	second_prior(t_int *stk_i, t_char *stk_c, char op)
 {
-	char sop;
+	char s_op;
 
-	sop = stktop_char(stk_c);
-	if (sop == '+' || sop == '-' || sop == '(' || isempty_char(stk_c) == 1)
+	s_op = stktop_char(stk_c);
+	if (s_op == '+' || s_op == '-' || s_op == '(' || isempty_char(stk_c) == 1)
 		push_char(stk_c, op);
 	else
 	{
-		while (sop == '*' || sop == '/' || sop == '%')
+		while (s_op == '*' || s_op == '/' || s_op == '%')
 		{
 			calc(stk_i, stk_c);
-			sop = stktop_char(stk_c);
+			s_op = stktop_char(stk_c);
 		}
 		push_char(stk_c, op);
 	}
